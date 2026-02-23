@@ -18,4 +18,4 @@ class EmailVerificationToken(Base):
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    user = relationship("User", back_populates="password_reset_tokens")
+    user = relationship("User", back_populates="email_verification_tokens")
