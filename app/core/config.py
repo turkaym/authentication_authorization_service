@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     max_login_attempts: int = Field(..., alias="MAX_LOGIN_ATTEMPTS")
     account_lock_minutes: int = Field(..., alias="ACCOUNT_LOCK_MINUTES")
 
+    token_hash_secret: str = Field(..., alias="TOKEN_HASH_SECRET")
+    bcrypt_rounds: int = Field(..., alias="BCRYPT_ROUNDS")
 
 @lru_cache
 def get_settings():
