@@ -1,10 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from app.core.config import settings
+from app.core.dependencies import get_current_user
 
 app = FastAPI(
     title=settings.app_name,
     debug=settings.debug
 )
+
 
 @app.get("/")
 def root():
@@ -12,4 +14,14 @@ def root():
         "app": settings.app_name,
         "environment": settings.env,
         "status": "running"
-        }
+    }
+
+
+@app.get("/protected")
+def protected_route(
+    current_user=Depends(get_current_user)
+):
+    return {
+        "message": "Protected route accessed",
+        "user": current_user,
+    }
